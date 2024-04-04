@@ -1,4 +1,7 @@
 .include "constants.inc"
+.segment "ZEROPAGE"
+.importzp player_x, player_y, frameCounter, animationCounter
+
 
 .segment "CODE"
 .import main
@@ -28,6 +31,12 @@ clear_oam:
 	INX
 	INX
 	BNE clear_oam
+  ; initialize zero-page values
+	LDA #$80
+	STA player_x
+	LDA #$a0
+	STA player_y
+
   
 vblankwait2:
   BIT PPUSTATUS
